@@ -26,26 +26,26 @@
 
 // 方法交换
 + (void)load {
-    // 保证其只执行一次
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        Class class = [self class];
-        
-        gk_swizzled_method(class, @selector(viewDidLoad), @selector(gk_viewDidLoad));
-        
-        // FIXME: 修复iOS11之后push或pop动画为NO，系统不主动调用UINavigationBar的layoutSubviews方法
-        if (GKDeviceVersion >= 11.0) {
-            gk_swizzled_method(class, @selector(pushViewController:animated:), @selector(gk_pushViewController:animated:));
-            
-            gk_swizzled_method(class, @selector(popViewControllerAnimated:), @selector(gk_popViewControllerAnimated:));
-            
-            gk_swizzled_method(class, @selector(popToViewController:animated:), @selector(gk_popToViewController:animated:));
-            
-            gk_swizzled_method(class, @selector(popToRootViewControllerAnimated:), @selector(gk_popToRootViewControllerAnimated:));
-            
-            gk_swizzled_method(class, @selector(setViewControllers:animated:), @selector(gk_setViewControllers:animated:));
-        }
-    });
+//    // 保证其只执行一次
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        Class class = [self class];
+//        
+//        gk_swizzled_method(class, @selector(viewDidLoad), @selector(gk_viewDidLoad));
+//        
+//        // FIXME: 修复iOS11之后push或pop动画为NO，系统不主动调用UINavigationBar的layoutSubviews方法
+//        if (GKDeviceVersion >= 11.0) {
+//            gk_swizzled_method(class, @selector(pushViewController:animated:), @selector(gk_pushViewController:animated:));
+//            
+//            gk_swizzled_method(class, @selector(popViewControllerAnimated:), @selector(gk_popViewControllerAnimated:));
+//            
+//            gk_swizzled_method(class, @selector(popToViewController:animated:), @selector(gk_popToViewController:animated:));
+//            
+//            gk_swizzled_method(class, @selector(popToRootViewControllerAnimated:), @selector(gk_popToRootViewControllerAnimated:));
+//            
+//            gk_swizzled_method(class, @selector(setViewControllers:animated:), @selector(gk_setViewControllers:animated:));
+//        }
+//    });
 }
 
 - (void)gk_viewDidLoad {
